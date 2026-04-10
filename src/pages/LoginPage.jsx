@@ -86,7 +86,8 @@ export default function LoginPage() {
         const restaurantId = user.user_metadata?.restaurant_id
 
         // 1. Role verification
-        if (userRole !== ctx.role) {
+        // Super admins can login from anywhere and will be redirected to their panel
+        if (userRole !== 'super_admin' && userRole !== ctx.role) {
           setError(`❌ Access Denied: Your account does not have ${ctx.role} privileges.`)
           await signOut()
           return
