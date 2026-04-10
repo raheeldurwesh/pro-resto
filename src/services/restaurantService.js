@@ -476,7 +476,7 @@ export function subscribeToProfiles(onChange, restaurantId = null) {
  * Finds the admin user for the given restaurant and creates a magic link
  * restricted for Super Admin use.
  */
-export async function getImpersonationLink(restaurantId) {
+export async function getImpersonationLink(restaurantId, targetPath = 'admin') {
   if (!supabaseAdmin) throw new Error('Service role key not configured.')
 
   // 1. Find the admin user ID for this restaurant
@@ -502,7 +502,7 @@ export async function getImpersonationLink(restaurantId) {
     type: 'magiclink',
     email: targetAdmin.email,
     options: {
-      redirectTo: `${baseUrl}/${rest.slug}/admin`, // Direct landing
+      redirectTo: `${baseUrl}/${rest.slug}/${targetPath}`, // Dynamic target
     }
   })
 
