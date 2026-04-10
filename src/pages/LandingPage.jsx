@@ -34,14 +34,16 @@ export default function LandingPage() {
           <div className="flex items-center gap-2">
             <span className="font-display italic text-amber text-2xl tracking-tight">TableServe</span>
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-mid">
-            <a href="#home" className="hover:text-amber transition-colors">Home</a>
-            <a href="#how-it-works" className="hover:text-amber transition-colors">How It Works</a>
-            <a href="#about" className="hover:text-amber transition-colors">About Us</a>
-            <a href="#contact" className="hover:text-amber transition-colors">Contact</a>
+          <div className="hidden md:flex items-center gap-8 text-sm font-body">
+            <div className="flex items-center gap-8 text-mid font-semibold">
+              <a href="#home" className="hover:text-bright transition-colors">Home</a>
+              <a href="#how-it-works" className="hover:text-bright transition-colors">How It Works</a>
+              <a href="#about" className="hover:text-bright transition-colors">About Us</a>
+              <a href="#contact" className="hover:text-bright transition-colors">Contact</a>
+            </div>
             <button 
               onClick={() => document.getElementById('login-section')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-amber py-2 px-6"
+              className="btn-amber py-2 px-5 text-sm font-bold shadow-sm"
             >
               Sign In
             </button>
@@ -81,7 +83,7 @@ export default function LandingPage() {
       </nav>
 
       {/* ── Hero Carousel ──────────────────────────────────────────── */}
-      <section id="home" className="relative h-[85vh] w-full overflow-hidden">
+      <section id="home" className="relative h-screen w-full overflow-hidden">
         <div className="carousel-container h-full">
           <div 
             className="carousel-track h-full" 
@@ -98,30 +100,36 @@ export default function LandingPage() {
 
         {/* Hero Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold mb-6 animate-slide-up bg-gradient-to-r from-amber to-amber-dim bg-clip-text text-transparent italic leading-[1.1]">
-            Modernizing Your <br /> Dining Experience
-          </h1>
-          <p className="text-base md:text-xl text-mid max-w-2xl mb-10 animate-slide-up [animation-delay:200ms]">
-            TableServe is the all-in-one SaaS platform for visionary restaurant owners. 
-            Automate orders, manage staff, and delight your guests with ease.
-          </p>
-          <div className="flex gap-4 animate-slide-up [animation-delay:400ms]">
-            <button 
-              onClick={() => document.getElementById('login-section')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-amber text-lg py-4 px-10 shadow-lg shadow-amber/20"
-            >
-              Get Started Now
-            </button>
+          <div className="max-w-4xl mx-auto space-y-8 animate-slide-up">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold bg-gradient-to-r from-amber to-amber-dim bg-clip-text text-transparent italic leading-[1.1] mb-2">
+              Modernizing Your <br /> Dining Experience
+            </h1>
+            <p className="text-base md:text-xl text-mid max-w-2xl mx-auto leading-relaxed italic opacity-90">
+              TableServe is the all-in-one SaaS platform for visionary restaurant owners. 
+              Automate orders, manage staff, and delight your guests with ease.
+            </p>
+            <div className="pt-4">
+              <button 
+                onClick={() => document.getElementById('login-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn-amber text-lg py-4 px-12 shadow-2xl shadow-amber/10 active:scale-95 transition-all"
+              >
+                Get Started Now
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Carousel Indicators */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
           {IMAGES.map((_, i) => (
             <button 
               key={i} 
               onClick={() => setActiveSlide(i)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSlide === i ? 'bg-amber w-8' : 'bg-mid/30'}`}
+              className={`transition-all duration-300 rounded-full ${
+                activeSlide === i 
+                  ? 'w-10 h-1.5 bg-amber shadow-[0_0_10px_rgba(251,191,36,0.5)]' 
+                  : 'w-2 h-2 bg-mid/30 hover:bg-mid/50'
+              }`}
             />
           ))}
         </div>
