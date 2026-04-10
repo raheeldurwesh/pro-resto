@@ -28,6 +28,8 @@ export const supabaseAdmin = serviceRoleKey && serviceRoleKey !== 'PASTE_YOUR_SE
       auth: {
         autoRefreshToken: false,
         persistSession: false,
+        storageKey: 'sb-admin-token', // Unique key to avoid conflict
+        detectSessionInUrl: false,    // Avoid capturing magic links accidentally
       },
     })
   : null
