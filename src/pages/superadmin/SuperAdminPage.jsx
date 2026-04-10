@@ -428,7 +428,6 @@ function RestaurantCard({ restaurant, showToast, onImpersonate, onReloadAll, sto
             )}
           </div>
 
-          {/* ── Links ──────────────────────────────────────────── */}
           <div className="space-y-1.5">
             <p className="text-mid text-xs font-semibold uppercase tracking-wider">Pages</p>
             <div className="grid gap-2 sm:grid-cols-3">
@@ -442,26 +441,28 @@ function RestaurantCard({ restaurant, showToast, onImpersonate, onReloadAll, sto
                   <p className="text-faint text-[10px] truncate">/{r.slug}?table=1</p>
                 </div>
               </a>
-              <a href={waiterUrl} target="_blank" rel="noopener noreferrer"
-                 className="flex items-center gap-2 px-3 py-2.5 rounded-xl
+              <button 
+                 onClick={() => onImpersonate(r, 'waiter')}
+                 className="flex items-center text-left gap-2 px-3 py-2.5 rounded-xl
                             bg-raised border border-border text-xs font-body
                             hover:border-amber/40 hover:text-bright transition-all">
                 <span className="text-base">👨‍🍳</span>
                 <div className="min-w-0">
                   <p className="text-bright font-semibold">Waiter Dashboard</p>
-                  <p className="text-faint text-[10px] truncate">/{r.slug}/waiter</p>
+                  <p className="text-faint text-[10px] truncate">Live View</p>
                 </div>
-              </a>
-              <a href={adminUrl} target="_blank" rel="noopener noreferrer"
-                 className="flex items-center gap-2 px-3 py-2.5 rounded-xl
+              </button>
+              <button 
+                 onClick={() => onImpersonate(r, 'admin')}
+                 className="flex items-center text-left gap-2 px-3 py-2.5 rounded-xl
                             bg-raised border border-border text-xs font-body
                             hover:border-amber/40 hover:text-bright transition-all">
                 <span className="text-base">⚙️</span>
                 <div className="min-w-0">
                   <p className="text-bright font-semibold">Admin Panel</p>
-                  <p className="text-faint text-[10px] truncate">/{r.slug}/admin</p>
+                  <p className="text-faint text-[10px] truncate">Settings View</p>
                 </div>
-              </a>
+              </button>
             </div>
           </div>
 
@@ -838,10 +839,10 @@ export default function SuperAdminPage() {
     )
   }
 
-  const handleImpersonate = async (restaurant) => {
+  const handleImpersonate = async (restaurant, targetPath = 'admin') => {
     setSwapping(true)
     try {
-      await startImpersonation(restaurant, getImpersonationLink)
+      await startImpersonation(restaurant, (id) => getImpersonationLink(id, targetPath))
     } catch (err) {
       showToast('❌ Impersonation failed: ' + err.message)
       setSwapping(false)
@@ -968,3 +969,4 @@ export default function SuperAdminPage() {
     </div>
   )
 }
+
